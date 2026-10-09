@@ -74,7 +74,10 @@ plastic_data_all
 ```{r Ex1, message = FALSE}
 # Write your code here to answer exercise 1
 
+frequency_table <- plastic_data_all |> 
+  count(region)
 
+frequency_table
 
 ```
 

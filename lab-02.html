@@ -367,14 +367,16 @@ library(readxl)</code></pre>
 <pre class="r"><code># Member 2 (pair 1) write code to load File 1 data here:
 data1 &lt;- read.csv(&quot;data/mismanaged-plastic-waste-per-capita.csv&quot;)
 # Member 4 (pair 2) write code to load File 2 data here:
-
+data2 &lt;- read_csv2(&quot;data/per-capita-ocean-plastic-waste.txt&quot;)
 # Member 1 (pair 1) write code to load File 3 data here:
 
 # Member 3 (pair 2) write code to load File 4 data here:</code></pre>
 <pre class="r"><code># Member 2 (pair 1) write code to create object &#39;plastic_data_all&#39;:
 plastic_data_all &lt;- data1
 # Member 4 (pair 2) write code to join your data to &#39;plastic_data_all&#39;:
-
+plastic_data_all &lt;- data2 %&gt;%
+  select(-name) %&gt;%
+  left_join(plastic_data_all, by = &quot;code&quot;)
 
 
 
@@ -386,166 +388,20 @@ plastic_data_all &lt;- data1
 # Member 3 (pair 2) write code to join your data to &#39;plastic_data_all&#39;:</code></pre>
 <pre class="r"><code># Member 2 (pair 1) adds code here to view the first 10 rows of &#39;plastic_data_all&#39;
 plastic_data_all</code></pre>
-<pre><code>##                                 name code mismanaged_plastic
-## 1                            Albania  ALB        24.23915307
-## 2                            Algeria  DZA        17.75899473
-## 3                             Angola  AGO         7.44527887
-## 4                Antigua and Barbuda  ATG         6.46391753
-## 5                          Argentina  ARG        10.40191152
-## 6                          Australia  AUS         0.20894338
-## 7                            Bahamas  BHS         5.68637532
-## 8                            Bahrain  BHR         0.63558806
-## 9                         Bangladesh  BGD         6.26810839
-## 10                          Barbados  BRB         3.03832753
-## 11                           Belgium  BEL         0.19793743
-## 12                            Belize  BLZ        15.43846154
-## 13                             Benin  BEN        11.29861876
-## 14            Bosnia and Herzegovina  BIH        16.82853681
-## 15                            Brazil  BRA        15.62046908
-## 16                            Brunei  BRN         1.59815243
-## 17                          Bulgaria  BGR         0.44528571
-## 18                      Burkina Faso  BFA        15.61429064
-## 19                          Cambodia  KHM        15.01152423
-## 20                          Cameroon  CMR        22.36814036
-## 21                            Canada  CAN         0.63048301
-## 22                        Cape Verde  CPV         6.48727273
-## 23                             Chile  CHL         1.62341705
-## 24                             China  CHN         8.55930841
-## 25                          Colombia  COL         1.69757047
-## 26                           Comoros  COM        69.51586369
-## 27                             Congo  COG        12.13361829
-## 28                        Costa Rica  CRI         1.13926307
-## 29                     Cote d&#39;Ivoire  CIV        11.33934751
-## 30                           Croatia  HRV         4.24794189
-## 31                            Cyprus  CYP         0.69808174
-## 32      Democratic Republic of Congo  COD        15.78193592
-## 33                           Denmark  DNK         0.06756757
-## 34                          Djibouti  DJI        10.56365503
-## 35                          Dominica  DMA        15.02777778
-## 36                Dominican Republic  DOM        18.06667287
-## 37                        East Timor  TLS        13.33642691
-## 38                           Ecuador  ECU         6.26205825
-## 39                             Egypt  EGY        14.29961748
-## 40                       El Salvador  SLV         3.36117137
-## 41                 Equatorial Guinea  GNQ         6.93436578
-## 42                           Eritrea  ERI        24.04575350
-## 43                           Estonia  EST         0.45248869
-## 44                              Fiji  FJI         4.33483146
-## 45                           Finland  FIN         0.47378887
-## 46                            France  FRA         0.42653155
-## 47                     French Guiana  GUF         0.43298969
-## 48                             Gabon  GAB         2.75701795
-## 49                            Gambia  GMB        14.94676320
-## 50                           Georgia  GEO         0.07680761
-## 51                           Germany  DEU         0.60677467
-## 52                             Ghana  GHA        17.09520679
-## 53                            Greece  GRC         0.43024921
-## 54                           Grenada  GRD        12.11607143
-## 55                        Guadeloupe  GLP         0.40500000
-## 56                         Guatemala  GTM        17.68972186
-## 57                            Guinea  GIN        11.58852087
-## 58                     Guinea-Bissau  GNB        10.65330557
-## 59                            Guyana  GUY        35.20434227
-## 60                             Haiti  HTI        21.12829619
-## 61                          Honduras  HND        14.97999179
-## 62                         Hong Kong  HKG         0.77743410
-## 63                           Iceland  ISL         0.44542773
-## 64                             India  IND         9.50960800
-## 65                         Indonesia  IDN         3.04565729
-## 66                              Iran  IRN         5.98167981
-## 67                              Iraq  IRQ        12.51007377
-## 68                           Ireland  IRL         0.54793118
-## 69                            Israel  ISR         0.71135110
-## 70                             Italy  ITA         0.64084228
-## 71                           Jamaica  JAM        16.84972863
-## 72                             Japan  JPN         0.28128646
-## 73                            Jordan  JOR        12.31686795
-## 74                        Kazakhstan  KAZ         2.92393941
-## 75                             Kenya  KEN         5.51445581
-## 76                          Kiribati  KIR         0.62711864
-## 77                            Kuwait  KWT         0.62752555
-## 78                            Latvia  LVA         0.50078658
-## 79                           Lebanon  LBN         6.80017503
-## 80                           Lesotho  LSO        14.30164706
-## 81                           Liberia  LBR         8.08790764
-## 82                             Libya  LBY        27.81983178
-## 83                         Lithuania  LTU         0.37572464
-## 84                        Madagascar  MDG         0.93626015
-## 85                          Malaysia  MYS        25.49151800
-## 86                          Maldives  MDV         0.11299435
-## 87                             Malta  MLT         0.58863636
-## 88                  Marshall Islands  MHL         0.27118644
-## 89                        Martinique  MTQ         0.36968085
-## 90                        Mauritania  MRT         4.59478568
-## 91                         Mauritius  MUS         0.23543307
-## 92                            Mexico  MEX         3.37535273
-## 93                            Monaco  MCO         0.12820513
-## 94                        Montenegro  MNE         0.02547771
-## 95                           Morocco  MAR         8.10177671
-## 96                        Mozambique  MOZ        14.30652704
-## 97                           Myanmar  MMR         8.03833842
-## 98                           Namibia  NAM         8.37354709
-## 99                       Netherlands  NLD         0.89097503
-## 100                      New Zealand  NZL         0.35835250
-## 101                        Nicaragua  NIC        16.93583868
-## 102                          Nigeria  NGA         9.69800561
-## 103                      North Korea  PRK         0.01254578
-## 104                           Norway  NOR         0.27774679
-## 105                             Oman  OMN         0.25145729
-## 106                         Pakistan  PAK         6.21734837
-## 107                            Palau  PLW         6.44444444
-## 108                        Palestine  PSE         0.42742421
-## 109                           Panama  PAN         8.55840791
-## 110                 Papua New Guinea  PNG        13.62101185
-## 111                             Peru  PER         4.31599508
-## 112                      Philippines  PHL        37.23096275
-## 113                           Poland  POL         0.37278294
-## 114                         Portugal  PRT         0.37336202
-## 115                      Puerto Rico  PRI         0.44084555
-## 116                            Qatar  QAT         0.54096045
-## 117                          Reunion  REU         0.26209224
-## 118                          Romania  ROU         2.69357087
-## 119                           Russia  RUS         2.49114977
-## 120            Saint Kitts and Nevis  KNA         1.83018868
-## 121                      Saint Lucia  LCA        23.36612022
-## 122 Saint Vincent and the Grenadines  VCT        11.12612613
-## 123                            Samoa  WSM         8.82233502
-## 124            Sao Tome and Principe  STP         9.62325581
-## 125                     Saudi Arabia  SAU         0.20940208
-## 126                          Senegal  SEN         4.02920962
-## 127                       Seychelles  SYC         0.33673469
-## 128                     Sierra Leone  SLE        11.67784462
-## 129                        Singapore  SGP         0.42522398
-## 130                         Slovakia  SVK         0.31500825
-## 131                         Slovenia  SVN         0.40596441
-## 132                  Solomon Islands  SLB         5.25373134
-## 133                          Somalia  SOM         0.00000000
-## 134                     South Africa  ZAF        12.09855186
-## 135                      South Korea  KOR         0.23730600
-## 136                            Spain  ESP         0.43541520
-## 137                        Sri Lanka  LKA         7.29065841
-## 138                            Sudan  SDN        18.25672109
-## 139                         Suriname  SUR        39.47160069
-## 140                           Sweden  SWE         0.42397369
-## 141                            Syria  SYR         0.02940832
-## 142                           Taiwan  TWN         0.31555481
-## 143                         Tanzania  TZA        29.59055254
-## 144                         Thailand  THA        19.55720564
-## 145                             Togo  TGO        15.06842366
-## 146                            Tonga  TON         6.40384615
-## 147              Trinidad and Tobago  TTO        52.42939068
-## 148                          Tunisia  TUN        24.75741770
-## 149                           Turkey  TUR        19.85029366
-## 150                          Ukraine  UKR         8.95069782
-## 151             United Arab Emirates  ARE         0.52553475
-## 152                   United Kingdom  GBR         0.44297349
-## 153                    United States  USA         0.81281512
-## 154                          Uruguay  URY        26.75332178
-## 155                        Venezuela  VEN        23.54576378
-## 156                          Vietnam  VNM        11.53604528
-## 157                   Western Sahara  ESH         7.06872852
-## 158                            Yemen  YEM        10.00401207
-## 159                         Zimbabwe  ZWE        35.83919426</code></pre>
+<pre><code>## # A tibble: 159 × 4
+##    code  mismanaged_plastic_ocean name                mismanaged_plastic
+##    &lt;chr&gt;                    &lt;dbl&gt; &lt;chr&gt;                            &lt;dbl&gt;
+##  1 ALB                    0.543   Albania                         24.2  
+##  2 DZA                    0.134   Algeria                         17.8  
+##  3 AGO                    0.0270  Angola                           7.45 
+##  4 ATG                    0.0206  Antigua and Barbuda              6.46 
+##  5 ARG                    0.0924  Argentina                       10.4  
+##  6 AUS                    0.00127 Australia                        0.209
+##  7 BHS                    0.0514  Bahamas                          5.69 
+##  8 BHR                    0       Bahrain                          0.636
+##  9 BGD                    0.151   Bangladesh                       6.27 
+## 10 BRB                    0.157   Barbados                         3.04 
+## # ℹ 149 more rows</code></pre>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
